@@ -11,7 +11,7 @@ namespace PedidoProdutoCliente.API.Controllers
     {
         private readonly IClienteListarPaginadoService _clienteListarPaginadoService = clienteListarPaginadoService;
 
-        [HttpGet("listar")]
+        [HttpGet("listar-paginado")]
         public async Task<IActionResult> ListarPaginado([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
             try

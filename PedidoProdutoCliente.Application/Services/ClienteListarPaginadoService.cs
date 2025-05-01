@@ -12,7 +12,7 @@ namespace PedidoProdutoCliente.Application.Services
 
         public async Task<BaseResponse<List<Cliente>>> Process(int page, int pageSize)
         {
-            if (ValidaParametros(page, pageSize))
+            if (ValidaParametros(page, pageSize) == false)
             {
                 return new BaseResponse<List<Cliente>>(false, false, notifications);
             }
