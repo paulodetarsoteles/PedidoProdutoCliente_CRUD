@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PedidoProdutoCliente.API.Extensions;
 using PedidoProdutoCliente.Infrastructure.Contexts;
+using Microsoft.EntityFrameworkCore.Design;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +23,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors(option => option.AllowAnyOrigin());
+app.UseCors(option => option.AllowAnyOrigin().AllowAnyHeader().AllowAnyHeader());
 
 app.UseHttpsRedirection();
 

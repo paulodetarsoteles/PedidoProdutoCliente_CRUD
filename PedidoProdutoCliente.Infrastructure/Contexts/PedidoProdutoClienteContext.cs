@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PedidoProdutoCliente.Domain.Models;
+using PedidoProdutoCliente.Infrastructure.Configurations;
 
 namespace PedidoProdutoCliente.Infrastructure.Contexts
 {
@@ -7,6 +9,10 @@ namespace PedidoProdutoCliente.Infrastructure.Contexts
         public PedidoProdutoClienteContext() { }
 
         public PedidoProdutoClienteContext(DbContextOptions<PedidoProdutoClienteContext> options) : base(options) { }
+
+        public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Pedido> Pedidos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -28,6 +34,10 @@ namespace PedidoProdutoCliente.Infrastructure.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");
+
+            modelBuilder.ApplyConfiguration(new ClienteConfiguration());
+            modelBuilder.ApplyConfiguration(new ProdutoConfiguration());
+            modelBuilder.ApplyConfiguration(new PedidoConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
