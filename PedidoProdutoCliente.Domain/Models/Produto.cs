@@ -1,6 +1,8 @@
-﻿namespace PedidoProdutoCliente.Domain.Models
+﻿using PedidoProdutoCliente.Domain.Interfaces;
+
+namespace PedidoProdutoCliente.Domain.Models
 {
-    public class Produto
+    public class Produto : IEntity
     {
         public int Id { get; set; }
         public required string Nome { get; set; }

@@ -12,8 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ServicesInterfaces\" />
-    <Folder Include="Services\" />
+    <Folder Include="Models\Requests\" />
   </ItemGroup>
 
 </Project>

@@ -4,7 +4,7 @@ using PedidoProdutoCliente.Infrastructure.TransactionsInterfaces;
 
 namespace PedidoProdutoCliente.Infrastructure.Transactions
 {
-    internal class UnityOfWork : IUnityOfWork
+    public class UnityOfWork : IUnityOfWork
     {
         private readonly PedidoProdutoClienteContext _DbPedidoProdutoCliente;
         private IDbContextTransaction dbContextTransaction { get; set; }
