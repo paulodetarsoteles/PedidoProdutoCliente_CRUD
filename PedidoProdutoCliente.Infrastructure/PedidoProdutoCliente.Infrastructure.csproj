@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PedidoProdutoCliente.Domain\PedidoProdutoCliente.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="RepositoryInterfaces\" />
+    <Folder Include="Repository\" />
+  </ItemGroup>
+
 </Project>
