@@ -10,14 +10,18 @@ namespace PedidoProdutoCliente.Infrastructure.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
+            try
             {
-                optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Pooling=true;Database=bd_pedido_produto_cliente;User Id=postgres;Password=admin@123;",
-                                 p =>
-                                 {
-                                     p.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
-                                 })
-                                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTrackingWithIdentityResolution);
+                if (!optionsBuilder.IsConfigured)
+                {
+                    optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Pooling=true;Database=bd_pedido_produto_cliente;User Id=postgres;Password=admin@123;",
+                                             p => { p.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery); })
+                                  .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTrackingWithIdentityResolution);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Falha na conexão com o banco de dados. Detalhes: {ex.Message}");
             }
         }
 
