@@ -4,31 +4,28 @@ using PedidoProdutoCliente.Infrastructure.TransactionsInterfaces;
 
 namespace PedidoProdutoCliente.Infrastructure.Transactions
 {
-    public class UnityOfWork : IUnityOfWork
+    public class UnityOfWork(PedidoProdutoClienteContext db) : IUnityOfWork
     {
-        private readonly PedidoProdutoClienteContext _DbPedidoProdutoCliente;
-        private IDbContextTransaction dbContextTransaction { get; set; }
-
-        public UnityOfWork(PedidoProdutoClienteContext db)
-        {
-            _DbPedidoProdutoCliente = db;
-        }
+        private readonly PedidoProdutoClienteContext _DbPedidoProdutoCliente = db;
+        private IDbContextTransaction? DbContextTransaction { get; set; }
 
         public async Task IniciarTransacao()
         {
-            dbContextTransaction = await _DbPedidoProdutoCliente.Database.BeginTransactionAsync();
+            DbContextTransaction = await _DbPedidoProdutoCliente.Database.BeginTransactionAsync();
         }
 
         public async Task<bool> Commit()
         {
             var ret = await _DbPedidoProdutoCliente.SaveChangesAsync() > 0;
-            dbContextTransaction?.Commit();
+            DbContextTransaction?.Commit();
             return ret;
         }
 
         public void Dispose()
         {
             _DbPedidoProdutoCliente?.Dispose();
+            DbContextTransaction?.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }
