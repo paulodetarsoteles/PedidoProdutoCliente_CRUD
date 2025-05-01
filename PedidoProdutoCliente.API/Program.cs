@@ -1,15 +1,21 @@
+using Microsoft.EntityFrameworkCore;
+using PedidoProdutoCliente.API.Extensions;
+using PedidoProdutoCliente.Infrastructure.Contexts;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddDbContext<PedidoProdutoClienteContext>(options =>
+{
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
+builder.Services.AddDependencyInjectionConfig();
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -23,5 +29,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseDataSeeder<PedidoProdutoClienteContext>();
 
 app.Run();

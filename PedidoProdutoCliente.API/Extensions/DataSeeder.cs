@@ -1,0 +1,17 @@
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace PedidoProdutoCliente.API.Extensions
+{
+    public static class DataSeeder
+    {
+        public static IApplicationBuilder UseDataSeeder<TDbContext>(this IApplicationBuilder app) where TDbContext : DbContext
+        {
+            using var scope = app.ApplicationServices.CreateScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<TDbContext>();
+
+            dbContext.Database.Migrate();
+
+            return app;
+        }
+    }
+}
