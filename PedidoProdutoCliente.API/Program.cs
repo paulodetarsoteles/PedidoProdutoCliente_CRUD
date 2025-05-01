@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PedidoProdutoCliente.API.Extensions;
 using PedidoProdutoCliente.Infrastructure.Contexts;
-using Microsoft.EntityFrameworkCore.Design;
 
 var builder = WebApplication.CreateBuilder(args);
 
