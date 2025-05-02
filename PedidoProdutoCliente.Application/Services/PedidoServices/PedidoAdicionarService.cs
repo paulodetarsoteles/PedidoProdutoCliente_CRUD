@@ -111,7 +111,7 @@ namespace PedidoProdutoCliente.Application.Services.PedidoServices
         {
             decimal valorTotalPedido = 0.00M;
 
-            foreach (var item in produtos) 
+            foreach (var item in produtos)
             {
                 valorTotalPedido += item.Valor;
 
