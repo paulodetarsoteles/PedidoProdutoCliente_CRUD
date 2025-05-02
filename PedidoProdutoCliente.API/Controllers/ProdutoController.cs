@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using PedidoProdutoCliente.Application.Models.Requests;
 using PedidoProdutoCliente.Application.ServicesInterfaces.ProdutoServicesInterfaces;
 
-namespace PedidoProdutoCliente.API.Controllers
+namespace PedidoProdutoproduto.API.Controllers
 {
     [ApiController]
     [Route("api/produto")]
@@ -20,6 +20,9 @@ namespace PedidoProdutoCliente.API.Controllers
         private readonly IProdutoExcluirService _produtoExcluirService = produtoExcluirService;
         private readonly ILogger<ProdutoController> _logger = logger;
 
+        /// <summary>Pesquisa um produto pelo nome.</summary>
+        /// <param name="request">Nome do produto a ser pesquisado.</param>
+        /// <returns>Retorna uma lista de produtos.</returns>
         [HttpGet("buscar-por-nome")]
         public async Task<IActionResult> BuscarPorNome([FromQuery] string nome)
         {
@@ -40,6 +43,9 @@ namespace PedidoProdutoCliente.API.Controllers
             }
         }
 
+        /// <summary>Lista os produtos de forma paginada.</summary>
+        /// <param name="request">Numero da página e a quantidade por página.</param>
+        /// <returns>Retorna uma lista de produtos.</returns>
         [HttpGet("listar-paginado")]
         public async Task<IActionResult> ListarPaginado([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
@@ -60,6 +66,9 @@ namespace PedidoProdutoCliente.API.Controllers
             }
         }
 
+        /// <summary>Adiciona um novo produto.</summary>
+        /// <param name="request">Dados do produto a ser adicionado.</param>
+        /// <returns>Retorna o resultado da operação.</returns>
         [HttpPost("adicionar")]
         public async Task<IActionResult> Adicionar([FromBody] ProdutoRequest.AdicionarProdutoRequest request)
         {
@@ -78,6 +87,9 @@ namespace PedidoProdutoCliente.API.Controllers
             }
         }
 
+        /// <summary>Atualiza um novo produto.</summary>
+        /// <param name="request">Dados do produto a ser atualizado.</param>
+        /// <returns>Retorna o resultado da operação.</returns>
         [HttpPut("atualizar")]
         public async Task<IActionResult> Atualizar([FromBody] ProdutoRequest.AtualizarProdutoRequest request)
         {
@@ -96,6 +108,9 @@ namespace PedidoProdutoCliente.API.Controllers
             }
         }
 
+        /// <summary>Exclui um produto.</summary>
+        /// <param name="request">Dados do produto a ser excluído.</param>
+        /// <returns>Retorna o resultado da operação.</returns>
         [HttpDelete("excluir")]
         public async Task<IActionResult> Excluir([FromQuery] int id)
         {
