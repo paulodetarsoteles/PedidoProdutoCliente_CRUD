@@ -59,11 +59,6 @@ namespace PedidoProdutoCliente.Application.Services.PedidoServices
                 notifications.Add("Forma de pagamento não pode ser vazia");
             }
 
-            if (request.ValorParcela <= 0)
-            {
-                notifications.Add("Valor da parcela não pode ser igual ou inferior a zero");
-            }
-
             if (request.Parcelas <= 0)
             {
                 notifications.Add("Quantidade de parcelas deve ser maior que zero");
@@ -114,13 +109,26 @@ namespace PedidoProdutoCliente.Application.Services.PedidoServices
 
         private async Task<bool> AdicionarEntidade(PedidoRequest.AdicionarPedidoRequest request, List<Produto> produtos)
         {
+            decimal valorTotalPedido = 0.00M;
+
+            foreach (var item in produtos) 
+            {
+                valorTotalPedido += item.Valor;
+
+                item.Quantidade--;
+
+                await _produtoRepository.Atualizar(item);
+            }
+
+            decimal valorParcela = Math.Round((valorTotalPedido / request.Parcelas), 2);
+
             var pedido = new Pedido()
             {
                 ClienteId = request.ClienteId,
                 PagamentoForma = request.PagamentoForma,
-                ValorParcela = request.ValorParcela,
+                ValorParcela = valorParcela,
                 Parcelas = request.Parcelas,
-                ValorTotal = request.ValorParcela * request.Parcelas,
+                ValorTotal = valorTotalPedido,
                 Observacoes = request.Observacoes,
                 Produtos = produtos,
                 DataPedido = DateTime.UtcNow

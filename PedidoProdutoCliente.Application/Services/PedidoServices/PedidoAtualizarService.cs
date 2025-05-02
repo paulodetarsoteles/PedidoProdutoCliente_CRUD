@@ -39,6 +39,8 @@ namespace PedidoProdutoCliente.Application.Services.PedidoServices
                     {
                         return new BaseResponse<bool>(false, false, notifications);
                     }
+
+                    pedido.Produtos = produtos;
                 }
                 else
                 {
@@ -66,11 +68,6 @@ namespace PedidoProdutoCliente.Application.Services.PedidoServices
             if (request.Id <= 0)
             {
                 notifications.Add("Id informado é inválido.");
-            }
-
-            if (request.ValorParcela != null && request.ValorParcela <= 0)
-            {
-                notifications.Add("Valor da parcela não pode ser igual ou inferior a zero");
             }
 
             if (request.Parcelas != null && request.Parcelas <= 0)
@@ -107,11 +104,6 @@ namespace PedidoProdutoCliente.Application.Services.PedidoServices
 
         private async Task<bool> AtualizarEntidade(Pedido pedido, PedidoRequest.AtualizarPedidoRequest request)
         {
-            if (request.ValorParcela != null)
-            {
-                pedido.ValorParcela = (decimal)request.ValorParcela;
-            }
-
             if (request.Parcelas != null)
             {
                 pedido.Parcelas = (int)request.Parcelas;
@@ -127,7 +119,24 @@ namespace PedidoProdutoCliente.Application.Services.PedidoServices
                 pedido.PagamentoForma = request.PagamentoForma;
             }
 
-            pedido.ValorTotal = pedido.ValorParcela * pedido.Parcelas;
+
+            if (pedido.Produtos != null)
+            {
+                decimal valorTotalPedido = 0.00M;
+
+                foreach (var item in pedido.Produtos)
+                {
+                    valorTotalPedido += item.Valor;
+
+                    item.Quantidade--;
+
+                    await _produtoRepository.Atualizar(item);
+                }
+
+                pedido.ValorTotal = valorTotalPedido;
+            }
+
+            pedido.ValorParcela = Math.Round((pedido.ValorTotal / pedido.Parcelas), 2);
 
             pedido.DataUltimaAtualizacao = DateTime.UtcNow;
 

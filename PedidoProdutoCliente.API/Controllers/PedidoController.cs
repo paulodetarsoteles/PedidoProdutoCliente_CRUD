@@ -64,7 +64,7 @@ namespace PedidoProdutoCliente.API.Controllers
             }
         }
 
-        /// <summary>Atualiza um novo pedido.</summary>
+        /// <summary>Atualiza pedido.</summary>
         /// <param name="request">Dados do pedido a ser atualizado.</param>
         /// <returns>Retorna o resultado da operação.</returns>
         [HttpPut("atualizar")]

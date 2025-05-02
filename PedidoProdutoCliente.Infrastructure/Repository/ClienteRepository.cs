@@ -15,6 +15,7 @@ namespace PedidoProdutoCliente.Infrastructure.Repository
             return await _context.Clientes
                 .Where(c => c.Nome.Contains(nome) &&
                        c.DataExclusao == null)
+                .Include(c => c.Pedidos)
                 .ToListAsync();
         }
 
