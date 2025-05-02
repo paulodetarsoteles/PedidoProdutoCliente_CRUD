@@ -16,5 +16,11 @@ namespace PedidoProdutoCliente.Infrastructure.Repository
                 .Where(c => c.Nome.Contains(nome))
                 .ToListAsync();
         }
+
+        public async Task<bool> ValidaCpfCadastrado(string cpf)
+        {
+            return await _context.Clientes
+                .AnyAsync(c => c.CPF == cpf);
+        }
     }
 }

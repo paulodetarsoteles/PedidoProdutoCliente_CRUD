@@ -16,6 +16,10 @@ namespace PedidoProdutoCliente.API.Extensions
 
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IClienteListarPaginadoService, ClienteListarPaginadoService>();
+            services.AddScoped<IClienteBuscarPorNomeService, ClienteBuscarPorNomeService>();
+            services.AddScoped<IClienteAdicionarService, ClienteAdicionarService>();
+            services.AddScoped<IClienteAtualizarService, ClienteAtualizarService>();
+            services.AddScoped<IClienteExcluirService, ClienteExcluirService>();
         }
     }
 }
