@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace PedidoProdutoCliente.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Criacao_do_banco_e_entidades : Migration
+    public partial class Recriacao_Banco_Dados : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -53,7 +53,8 @@ namespace PedidoProdutoCliente.Infrastructure.Migrations
                 name: "Pedidos",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     ClienteId = table.Column<int>(type: "integer", nullable: false),
                     PagamentoForma = table.Column<string>(type: "character varying(150)", unicode: false, maxLength: 150, nullable: false, comment: "Forma de pagamento"),
                     Parcelas = table.Column<int>(type: "integer", nullable: false, comment: "Quantidade de parcelas"),
@@ -79,7 +80,7 @@ namespace PedidoProdutoCliente.Infrastructure.Migrations
                 name: "PedidoProduto",
                 columns: table => new
                 {
-                    PedidosId = table.Column<Guid>(type: "uuid", nullable: false),
+                    PedidosId = table.Column<int>(type: "integer", nullable: false),
                     ProdutosId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>

@@ -38,7 +38,7 @@ namespace PedidoProdutoCliente.Application.Services.ProdutoServices
                 return false;
             }
 
-            if (!string.IsNullOrEmpty(request.Nome))
+            if (string.IsNullOrEmpty(request.Nome))
             {
                 notifications.Add("Nome obrigatório");
             }
@@ -46,11 +46,6 @@ namespace PedidoProdutoCliente.Application.Services.ProdutoServices
             if (await _produtoRepository.ValidaProdutoCadastrado(request.Nome))
             {
                 notifications.Add("Nome obrigatório");
-            }
-
-            if (await _produtoRepository.ValidaProdutoCadastrado(request.Nome) == false)
-            {
-                notifications.Add("Nome do produto já cadastrado");
             }
 
             if (request.Valor <= 0)

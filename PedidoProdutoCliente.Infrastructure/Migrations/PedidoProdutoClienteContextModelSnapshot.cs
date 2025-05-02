@@ -17,7 +17,6 @@ namespace PedidoProdutoCliente.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseCollation("Latin1_General_CI_AS")
                 .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -25,8 +24,8 @@ namespace PedidoProdutoCliente.Infrastructure.Migrations
 
             modelBuilder.Entity("PedidoProduto", b =>
                 {
-                    b.Property<Guid>("PedidosId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("PedidosId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("ProdutosId")
                         .HasColumnType("integer");
@@ -92,9 +91,11 @@ namespace PedidoProdutoCliente.Infrastructure.Migrations
 
             modelBuilder.Entity("PedidoProdutoCliente.Domain.Models.Pedido", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ClienteId")
                         .HasColumnType("integer");
