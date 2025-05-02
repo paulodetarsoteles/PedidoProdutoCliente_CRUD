@@ -1,9 +1,9 @@
 ﻿using PedidoProdutoCliente.Application.Models.Responses;
-using PedidoProdutoCliente.Application.ServicesInterfaces;
+using PedidoProdutoCliente.Application.ServicesInterfaces.ClienteServicesInterfaces;
 using PedidoProdutoCliente.Domain.Models;
 using PedidoProdutoCliente.Infrastructure.RepositoryInterfaces;
 
-namespace PedidoProdutoCliente.Application.Services
+namespace PedidoProdutoCliente.Application.Services.ClienteServices
 {
     public class ClienteListarPaginadoService(IClienteRepository clienteRepository) : IClienteListarPaginadoService
     {
@@ -12,19 +12,26 @@ namespace PedidoProdutoCliente.Application.Services
 
         public async Task<BaseResponse<List<Cliente>>> Process(int page, int pageSize)
         {
-            if (ValidaParametros(page, pageSize) == false)
+            try
             {
-                return new BaseResponse<List<Cliente>>(false, false, notifications);
+                if (ValidaParametros(page, pageSize) == false)
+                {
+                    return new BaseResponse<List<Cliente>>(false, false, notifications);
+                }
+
+                var clientes = await _clienteRepository.ListarPaginado(page, pageSize);
+
+                if (clientes == null || clientes.Count == 0)
+                {
+                    return new BaseResponse<List<Cliente>>(false, "Nenhum cliente encontrado.");
+                }
+
+                return new BaseResponse<List<Cliente>>(clientes);
             }
-
-            var clientes = await _clienteRepository.ListarPaginado(page, pageSize);
-
-            if (clientes == null || clientes.Count == 0)
+            catch (Exception ex)
             {
-                return new BaseResponse<List<Cliente>>(false, "Nenhum cliente encontrado.");
+                throw new Exception(ex.Message);
             }
-
-            return new BaseResponse<List<Cliente>>(clientes);
         }
 
         private bool ValidaParametros(int page, int pageSize)

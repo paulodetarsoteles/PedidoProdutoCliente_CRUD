@@ -1,7 +1,7 @@
 ﻿using PedidoProdutoCliente.Application.Models.Requests;
 using PedidoProdutoCliente.Application.Models.Responses;
 
-namespace PedidoProdutoCliente.Application.ServicesInterfaces
+namespace PedidoProdutoCliente.Application.ServicesInterfaces.ClienteServicesInterfaces
 {
     public interface IClienteAdicionarService
     {

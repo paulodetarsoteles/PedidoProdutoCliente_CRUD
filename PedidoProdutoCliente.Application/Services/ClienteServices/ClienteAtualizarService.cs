@@ -1,11 +1,11 @@
 ﻿using PedidoProdutoCliente.Application.Models.Requests;
 using PedidoProdutoCliente.Application.Models.Responses;
-using PedidoProdutoCliente.Application.ServicesInterfaces;
+using PedidoProdutoCliente.Application.ServicesInterfaces.ClienteServicesInterfaces;
 using PedidoProdutoCliente.Domain.Models;
 using PedidoProdutoCliente.Infrastructure.RepositoryInterfaces;
 using System.ComponentModel.DataAnnotations;
 
-namespace PedidoProdutoCliente.Application.Services
+namespace PedidoProdutoCliente.Application.Services.ClienteServices
 {
     public class ClienteAtualizarService(IClienteRepository clienteRepository) : IClienteAtualizarService
     {
@@ -14,21 +14,28 @@ namespace PedidoProdutoCliente.Application.Services
 
         public async Task<BaseResponse<bool>> Process(ClienteRequest.Atualizar request)
         {
-            if (ValidaParametros(request) == false)
+            try
             {
-                return new BaseResponse<bool>(false, false, notifications);
+                if (ValidaParametros(request) == false)
+                {
+                    return new BaseResponse<bool>(false, false, notifications);
+                }
+
+                var cliente = await _clienteRepository.ObterPorId(request.Id);
+
+                if (cliente == null)
+                {
+                    return new BaseResponse<bool>(false, "Nenhum cliente encontrado.");
+                }
+
+                var result = await AtualizarEntidade(cliente, request);
+
+                return new BaseResponse<bool>(result);
             }
-
-            var cliente = await _clienteRepository.ObterPorId(request.Id);
-
-            if (cliente == null)
+            catch (Exception ex)
             {
-                return new BaseResponse<bool>(false, "Nenhum cliente encontrado.");
+                throw new Exception(ex.Message);
             }
-
-            var result = await AtualizarEntidade(cliente, request);
-
-            return new BaseResponse<bool>(result);
         }
 
         private bool ValidaParametros(ClienteRequest.Atualizar request)

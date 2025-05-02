@@ -1,11 +1,11 @@
 ﻿using PedidoProdutoCliente.Application.Extensions;
 using PedidoProdutoCliente.Application.Models.Requests;
 using PedidoProdutoCliente.Application.Models.Responses;
-using PedidoProdutoCliente.Application.ServicesInterfaces;
+using PedidoProdutoCliente.Application.ServicesInterfaces.ClienteServicesInterfaces;
 using PedidoProdutoCliente.Domain.Models;
 using PedidoProdutoCliente.Infrastructure.RepositoryInterfaces;
 
-namespace PedidoProdutoCliente.Application.Services
+namespace PedidoProdutoCliente.Application.Services.ClienteServices
 {
     public class ClienteAdicionarService(IClienteRepository clienteRepository) : IClienteAdicionarService
     {
@@ -14,14 +14,21 @@ namespace PedidoProdutoCliente.Application.Services
 
         public async Task<BaseResponse<bool>> Process(ClienteRequest.Adicionar request)
         {
-            if (await ValidaParametros(request) == false)
+            try
             {
-                return new BaseResponse<bool>(false, false, notifications);
+                if (await ValidaParametros(request) == false)
+                {
+                    return new BaseResponse<bool>(false, false, notifications);
+                }
+
+                var result = await AdicionarEntidade(request);
+
+                return new BaseResponse<bool>(result);
             }
-
-            var result = await AdicionarEntidade(request);
-
-            return new BaseResponse<bool>(result);
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         private async Task<bool> ValidaParametros(ClienteRequest.Adicionar request)

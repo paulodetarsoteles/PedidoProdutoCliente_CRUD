@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PedidoProdutoCliente.Application.Models.Requests;
-using PedidoProdutoCliente.Application.ServicesInterfaces;
+using PedidoProdutoCliente.Application.ServicesInterfaces.ClienteServicesInterfaces;
 
 namespace PedidoProdutoCliente.API.Controllers
 {

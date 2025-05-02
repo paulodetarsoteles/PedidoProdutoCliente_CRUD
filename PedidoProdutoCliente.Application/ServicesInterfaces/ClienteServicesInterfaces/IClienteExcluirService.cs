@@ -1,4 +1,4 @@
-﻿namespace PedidoProdutoCliente.Application.ServicesInterfaces
+﻿namespace PedidoProdutoCliente.Application.ServicesInterfaces.ClienteServicesInterfaces
 {
     public interface IClienteExcluirService
     {

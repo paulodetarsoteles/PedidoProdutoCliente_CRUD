@@ -1,5 +1,5 @@
-﻿using PedidoProdutoCliente.Application.Services;
-using PedidoProdutoCliente.Application.ServicesInterfaces;
+﻿using PedidoProdutoCliente.Application.Services.ClienteServices;
+using PedidoProdutoCliente.Application.ServicesInterfaces.ClienteServicesInterfaces;
 using PedidoProdutoCliente.Infrastructure.Repository;
 using PedidoProdutoCliente.Infrastructure.RepositoryInterfaces;
 using PedidoProdutoCliente.Infrastructure.Transactions;

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PedidoProdutoCliente.Application.Models.Requests;
-using PedidoProdutoCliente.Application.ServicesInterfaces;
+using PedidoProdutoCliente.Application.ServicesInterfaces.ClienteServicesInterfaces;
 
 namespace PedidoProdutoCliente.API.Controllers
 {
@@ -10,13 +10,15 @@ namespace PedidoProdutoCliente.API.Controllers
         IClienteListarPaginadoService clienteListarPaginadoService,
         IClienteAdicionarService clienteAdicionarService,
         IClienteAtualizarService clienteAtualizarService,
-        IClienteExcluirService clienteExcluirService) : ControllerBase
+        IClienteExcluirService clienteExcluirService,
+        ILogger<ClienteController> logger) : ControllerBase
     {
         private readonly IClienteBuscarPorNomeService _clienteBuscarPorNomeService = clienteBuscarPorNomeService;
         private readonly IClienteListarPaginadoService _clienteListarPaginadoService = clienteListarPaginadoService;
         private readonly IClienteAdicionarService _clienteAdicionarService = clienteAdicionarService;
         private readonly IClienteAtualizarService _clienteAtualizarService = clienteAtualizarService;
         private readonly IClienteExcluirService _clienteExcluirService = clienteExcluirService;
+        private readonly ILogger<ClienteController> _logger = logger;
 
         [HttpGet("buscar-por-nome")]
         public async Task<IActionResult> BuscarPorNome([FromQuery] string nomeRequest)
@@ -31,8 +33,9 @@ namespace PedidoProdutoCliente.API.Controllers
 
                 return Ok(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex.Message, "Ocorreu um erro ao processar a requisição.");
                 return StatusCode(500, "Erro inesperado");
             }
         }
@@ -50,8 +53,9 @@ namespace PedidoProdutoCliente.API.Controllers
 
                 return Ok(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex.Message, "Ocorreu um erro ao processar a requisição.");
                 return StatusCode(500, "Erro inesperado");
             }
         }
@@ -67,8 +71,9 @@ namespace PedidoProdutoCliente.API.Controllers
 
                 return Ok(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex.Message, "Ocorreu um erro ao processar a requisição.");
                 return StatusCode(500, "Erro inesperado");
             }
         }
@@ -84,8 +89,9 @@ namespace PedidoProdutoCliente.API.Controllers
 
                 return Ok(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex.Message, "Ocorreu um erro ao processar a requisição.");
                 return StatusCode(500, "Erro inesperado");
             }
         }
@@ -101,8 +107,9 @@ namespace PedidoProdutoCliente.API.Controllers
 
                 return NoContent();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex.Message, "Ocorreu um erro ao processar a requisição.");
                 return StatusCode(500, "Erro inesperado");
             }
         }
