@@ -1,21 +1,31 @@
 using Microsoft.AspNetCore.Mvc;
 using PedidoProdutoCliente.Application.Models.Requests;
-using PedidoProdutoCliente.Application.ServicesInterfaces.ClienteServicesInterfaces;
+using PedidoProdutoCliente.Application.ServicesInterfaces.ProdutoServicesInterfaces;
 
-namespace PedidoProdutoCliente.API.Controllers
+namespace PedidoProdutoproduto.API.Controllers
 {
     [ApiController]
     [Route("api/produto")]
-    public class ProdutoController(IClienteListarPaginadoService clienteListarPaginadoService) : ControllerBase
+    public class ProdutoController(IProdutoBuscarPorNomeService produtoBuscarPorNomeService,
+        IProdutoListarPaginadoService produtoListarPaginadoService,
+        IProdutoAdicionarService produtoAdicionarService,
+        IProdutoAtualizarService produtoAtualizarService,
+        IProdutoExcluirService produtoExcluirService,
+        ILogger<ProdutoController> logger) : ControllerBase
     {
-        private readonly IClienteListarPaginadoService _clienteListarPaginadoService = clienteListarPaginadoService;
+        private readonly IProdutoBuscarPorNomeService _produtoBuscarPorNomeService = produtoBuscarPorNomeService;
+        private readonly IProdutoListarPaginadoService _produtoListarPaginadoService = produtoListarPaginadoService;
+        private readonly IProdutoAdicionarService _produtoAdicionarService = produtoAdicionarService;
+        private readonly IProdutoAtualizarService _produtoAtualizarService = produtoAtualizarService;
+        private readonly IProdutoExcluirService _produtoExcluirService = produtoExcluirService;
+        private readonly ILogger<ProdutoController> _logger = logger;
 
         [HttpGet("listar-paginado")]
         public async Task<IActionResult> ListarPaginado([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
             try
             {
-                var result = await _clienteListarPaginadoService.Process(page, pageSize);
+                var result = await _produtoListarPaginadoService.Process(page, pageSize);
 
                 if (result.ValidParameters == false) return BadRequest(result);
 
@@ -23,34 +33,45 @@ namespace PedidoProdutoCliente.API.Controllers
 
                 return Ok(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex.Message, "Ocorreu um erro ao processar a requisição.");
                 return StatusCode(500, "Erro inesperado");
             }
         }
 
         [HttpPost("adicionar")]
-        public async Task<IActionResult> Adicionar([FromBody] ClienteRequest.Adicionar request)
+        public async Task<IActionResult> Adicionar([FromBody] ProdutoRequest.Adicionar request)
         {
             try
             {
-                return Ok();
+                var result = await _produtoAdicionarService.Process(request);
+
+                if (result.ValidParameters == false) return BadRequest(result);
+
+                return Ok(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex.Message, "Ocorreu um erro ao processar a requisição.");
                 return StatusCode(500, "Erro inesperado");
             }
         }
 
         [HttpPut("atualizar")]
-        public async Task<IActionResult> Atualizar([FromBody] ClienteRequest.Atualizar request)
+        public async Task<IActionResult> Atualizar([FromBody] ProdutoRequest.Atualizar request)
         {
             try
             {
-                return Ok();
+                var result = await _produtoAtualizarService.Process(request);
+
+                if (result.ValidParameters == false) return BadRequest(result);
+
+                return Ok(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex.Message, "Ocorreu um erro ao processar a requisição.");
                 return StatusCode(500, "Erro inesperado");
             }
         }
@@ -60,10 +81,15 @@ namespace PedidoProdutoCliente.API.Controllers
         {
             try
             {
-                return Ok();
+                var result = await _produtoExcluirService.Process(id);
+
+                if (result == false) return BadRequest();
+
+                return NoContent();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex.Message, "Ocorreu um erro ao processar a requisição.");
                 return StatusCode(500, "Erro inesperado");
             }
         }
