@@ -1,32 +1,32 @@
 ﻿using PedidoProdutoCliente.Application.Models.Responses;
-using PedidoProdutoCliente.Application.ServicesInterfaces.ProdutoServicesInterfaces;
+using PedidoProdutoCliente.Application.ServicesInterfaces.PedidoServicesInterfaces;
 using PedidoProdutoCliente.Domain.Models;
 using PedidoProdutoCliente.Infrastructure.RepositoryInterfaces;
 
-namespace PedidoProdutoCliente.Application.Services.ProdutoServices
+namespace PedidoProdutoCliente.Application.Services.PedidoServices
 {
-    public class ProdutoListarPaginadoService(IProdutoRepository produtoRepository) : IProdutoListarPaginadoService
+    public class PedidoListarPaginadoService(IPedidoRepository pedidoRepository) : IPedidoListarPaginadoService
     {
-        private readonly IProdutoRepository _produtoRepository = produtoRepository;
+        private readonly IPedidoRepository _pedidoRepository = pedidoRepository;
         private readonly List<string> notifications = [];
 
-        public async Task<BaseResponse<List<Produto>>> Process(int page, int pageSize)
+        public async Task<BaseResponse<List<Pedido>>> Process(int page, int pageSize)
         {
             try
             {
                 if (ValidaParametros(page, pageSize) == false)
                 {
-                    return new BaseResponse<List<Produto>>(false, false, notifications);
+                    return new BaseResponse<List<Pedido>>(false, false, notifications);
                 }
 
-                var produtos = await _produtoRepository.ListarPaginado(page, pageSize);
+                var pedidos = await _pedidoRepository.ListarPaginado(page, pageSize);
 
-                if (produtos == null || produtos.Count == 0)
+                if (pedidos == null || pedidos.Count == 0)
                 {
-                    return new BaseResponse<List<Produto>>(false, "Nenhum Produto encontrado.");
+                    return new BaseResponse<List<Pedido>>(false, "Nenhum Pedido encontrado.");
                 }
 
-                return new BaseResponse<List<Produto>>(produtos);
+                return new BaseResponse<List<Pedido>>(pedidos);
             }
             catch (Exception ex)
             {

@@ -11,8 +11,4 @@
     <ProjectReference Include="..\PedidoProdutoCliente.Infrastructure\PedidoProdutoCliente.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\PedidoServices\" />
-  </ItemGroup>
-
 </Project>

@@ -1,11 +1,11 @@
-﻿using PedidoProdutoCliente.Application.ServicesInterfaces.ProdutoServicesInterfaces;
+﻿using PedidoProdutoCliente.Application.ServicesInterfaces.PedidoServicesInterfaces;
 using PedidoProdutoCliente.Infrastructure.RepositoryInterfaces;
 
-namespace PedidoProdutoCliente.Application.Services.ProdutoServices
+namespace PedidoProdutoCliente.Application.Services.PedidoServices
 {
-    public class ProdutoExcluirService(IProdutoRepository produtoRepository) : IProdutoExcluirService
+    public class PedidoExcluirService(IPedidoRepository pedidoRepository) : IPedidoExcluirService
     {
-        private readonly IProdutoRepository _produtoRepository = produtoRepository;
+        private readonly IPedidoRepository _pedidoRepository = pedidoRepository;
 
         public async Task<bool> Process(int id)
         {
@@ -13,13 +13,13 @@ namespace PedidoProdutoCliente.Application.Services.ProdutoServices
             {
                 if (id <= 0) return false;
 
-                var produto = await _produtoRepository.ObterPorId(id);
+                var produto = await _pedidoRepository.ObterPorId(id);
 
                 if (produto == null || produto.DataExclusao != null) return false;
 
                 produto.DataExclusao = DateTime.UtcNow;
 
-                var result = await _produtoRepository.Excluir(produto);
+                var result = await _pedidoRepository.Excluir(produto);
 
                 return true;
             }

@@ -4,7 +4,7 @@ using PedidoProdutoCliente.Application.ServicesInterfaces.ProdutoServicesInterfa
 using PedidoProdutoCliente.Domain.Models;
 using PedidoProdutoCliente.Infrastructure.RepositoryInterfaces;
 
-namespace PedidoProdutoProduto.Application.Services.ProdutoServices
+namespace PedidoProdutoCliente.Application.Services.ProdutoServices
 {
     public class ProdutoAtualizarService(IProdutoRepository produtoRepository) : IProdutoAtualizarService
     {

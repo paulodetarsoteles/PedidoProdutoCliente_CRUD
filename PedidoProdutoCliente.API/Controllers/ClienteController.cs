@@ -44,7 +44,7 @@ namespace PedidoProdutoCliente.API.Controllers
         }
 
         /// <summary>Lista os clientes de forma paginada.</summary>
-        /// <param name="request">Numero da página e a quantidade por página.</param>
+        /// <param name="request">Numero da página e a quantidade de resultados por página.</param>
         /// <returns>Retorna uma lista de clientes.</returns>
         [HttpGet("listar-paginado")]
         public async Task<IActionResult> ListarPaginado([FromQuery] int page = 1, [FromQuery] int pageSize = 10)

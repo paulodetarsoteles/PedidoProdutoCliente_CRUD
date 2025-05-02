@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using PedidoProdutoCliente.Application.Models.Requests;
 using PedidoProdutoCliente.Application.ServicesInterfaces.ProdutoServicesInterfaces;
 
-namespace PedidoProdutoproduto.API.Controllers
+namespace PedidoProdutoCliente.API.Controllers
 {
     [ApiController]
     [Route("api/produto")]
@@ -44,7 +44,7 @@ namespace PedidoProdutoproduto.API.Controllers
         }
 
         /// <summary>Lista os produtos de forma paginada.</summary>
-        /// <param name="request">Numero da página e a quantidade por página.</param>
+        /// <param name="request">Numero da página e a quantidade de resultados por página.</param>
         /// <returns>Retorna uma lista de produtos.</returns>
         [HttpGet("listar-paginado")]
         public async Task<IActionResult> ListarPaginado([FromQuery] int page = 1, [FromQuery] int pageSize = 10)

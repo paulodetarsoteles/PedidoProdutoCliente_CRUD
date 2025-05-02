@@ -3,22 +3,22 @@ using PedidoProdutoCliente.Application.ServicesInterfaces.ProdutoServicesInterfa
 using PedidoProdutoCliente.Domain.Models;
 using PedidoProdutoCliente.Infrastructure.RepositoryInterfaces;
 
-namespace PedidoProdutoProduto.Application.Services.ProdutoServices
+namespace PedidoProdutoCliente.Application.Services.ProdutoServices
 {
     public class ProdutoBuscarPorNomeService(IProdutoRepository produtoRepository) : IProdutoBuscarPorNomeService
     {
         private readonly IProdutoRepository _produtoRepository = produtoRepository;
 
-        public async Task<BaseResponse<List<Produto>>> Process(string nomeRequest)
+        public async Task<BaseResponse<List<Produto>>> Process(string nome)
         {
             try
             {
-                if (string.IsNullOrEmpty(nomeRequest))
+                if (string.IsNullOrEmpty(nome))
                 {
                     return new BaseResponse<List<Produto>>(false, false, ["Nome inválido ou em branco"]);
                 }
 
-                var produtos = await _produtoRepository.BuscarPorNome(nomeRequest);
+                var produtos = await _produtoRepository.BuscarPorNome(nome);
 
                 if (produtos == null || produtos.Count == 0)
                 {

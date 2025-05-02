@@ -13,7 +13,8 @@ namespace PedidoProdutoCliente.Infrastructure.Repository
         public async Task<List<Cliente>?> BuscarPorNome(string nome)
         {
             return await _context.Clientes
-                .Where(c => c.Nome.Contains(nome))
+                .Where(c => c.Nome.Contains(nome) &&
+                       c.DataExclusao == null)
                 .ToListAsync();
         }
 

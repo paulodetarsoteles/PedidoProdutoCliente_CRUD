@@ -6,5 +6,7 @@ namespace PedidoProdutoCliente.Infrastructure.RepositoryInterfaces
     {
         Task<List<Produto>?> BuscarPorNome(string nome);
         Task<bool> ValidaProdutoCadastrado(string nome);
+        Task<List<Produto>> BuscarProdutosPorId(List<int> ids);
+        Task<List<Produto>> BuscaProdutosPorPedidoId(int pedidoId);
     }
 }

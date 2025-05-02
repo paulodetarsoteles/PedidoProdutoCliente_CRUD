@@ -1,10 +1,7 @@
-﻿using PedidoProdutoCliente.Application.Models.Responses;
-using PedidoProdutoCliente.Domain.Models;
-
-namespace PedidoProdutoCliente.Application.ServicesInterfaces.ProdutoServicesInterfaces
+﻿namespace PedidoProdutoCliente.Application.ServicesInterfaces.ProdutoServicesInterfaces
 {
-    public interface IProdutoBuscarPorNomeService
+    public interface IProdutoExcluirService
     {
-        Task<BaseResponse<List<Produto>>> Process(string nome);
+        Task<bool> Process(int id);
     }
 }

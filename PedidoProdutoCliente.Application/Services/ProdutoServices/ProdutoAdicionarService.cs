@@ -4,7 +4,7 @@ using PedidoProdutoCliente.Application.ServicesInterfaces.ProdutoServicesInterfa
 using PedidoProdutoCliente.Domain.Models;
 using PedidoProdutoCliente.Infrastructure.RepositoryInterfaces;
 
-namespace PedidoProdutoProduto.Application.Services.ProdutoServices
+namespace PedidoProdutoCliente.Application.Services.ProdutoServices
 {
     public class ProdutoAdicionarService(IProdutoRepository produtoRepository) : IProdutoAdicionarService
     {
@@ -78,9 +78,8 @@ namespace PedidoProdutoProduto.Application.Services.ProdutoServices
                 Nome = request.Nome,
                 Valor = request.Valor,
                 Quantidade = request.Quantidade,
+                Datacadastro = DateTime.UtcNow
             };
-
-            produto.Datacadastro = DateTime.UtcNow;
 
             return await _produtoRepository.Adicionar(produto);
         }

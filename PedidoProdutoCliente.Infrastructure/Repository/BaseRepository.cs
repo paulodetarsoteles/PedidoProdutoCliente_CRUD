@@ -14,6 +14,7 @@ namespace PedidoProdutoCliente.Infrastructure.Repository
         public async Task<List<T>?> ListarPaginado(int page, int pageSize)
         {
             return await _context.Set<T>()
+                                .Where(c => c.DataExclusao == null)
                                 .OrderBy(c => c.Id)
                                 .Skip((page - 1) * pageSize)
                                 .Take(pageSize)

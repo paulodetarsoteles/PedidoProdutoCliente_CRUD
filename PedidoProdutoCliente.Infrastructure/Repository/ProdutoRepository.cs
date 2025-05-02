@@ -22,5 +22,22 @@ namespace PedidoProdutoCliente.Infrastructure.Repository
             return await _context.Produtos
                 .AnyAsync(p => p.Nome.ToUpper() == nome.ToUpper());
         }
+
+        public async Task<List<Produto>> BuscarProdutosPorId(List<int> ids)
+        {
+            return await _context.Produtos
+                .Where(p => ids.Contains(p.Id) &&
+                       p.DataExclusao == null)
+                .ToListAsync();
+        }
+
+        public async Task<List<Produto>> BuscaProdutosPorPedidoId(int pedidoId)
+        {
+            var pedido = await _context.Pedidos
+                .Include(p => p.Produtos)
+                .FirstAsync(p => p.Id == pedidoId);
+
+            return pedido.Produtos?.ToList() ?? [];
+        }
     }
 }

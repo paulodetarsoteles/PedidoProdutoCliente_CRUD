@@ -1,12 +1,13 @@
 ﻿using PedidoProdutoCliente.Application.Services.ClienteServices;
+using PedidoProdutoCliente.Application.Services.PedidoServices;
+using PedidoProdutoCliente.Application.Services.ProdutoServices;
 using PedidoProdutoCliente.Application.ServicesInterfaces.ClienteServicesInterfaces;
+using PedidoProdutoCliente.Application.ServicesInterfaces.PedidoServicesInterfaces;
 using PedidoProdutoCliente.Application.ServicesInterfaces.ProdutoServicesInterfaces;
 using PedidoProdutoCliente.Infrastructure.Repository;
 using PedidoProdutoCliente.Infrastructure.RepositoryInterfaces;
 using PedidoProdutoCliente.Infrastructure.Transactions;
 using PedidoProdutoCliente.Infrastructure.TransactionsInterfaces;
-using PedidoProdutoproduto.Application.Services.produtoServices;
-using PedidoProdutoProduto.Application.Services.ProdutoServices;
 
 namespace PedidoProdutoCliente.API.Extensions
 {
@@ -30,6 +31,12 @@ namespace PedidoProdutoCliente.API.Extensions
             services.AddScoped<IProdutoAdicionarService, ProdutoAdicionarService>();
             services.AddScoped<IProdutoAtualizarService, ProdutoAtualizarService>();
             services.AddScoped<IProdutoExcluirService, ProdutoExcluirService>();
+
+            services.AddScoped<IPedidoRepository, PedidoRepository>();
+            services.AddScoped<IPedidoListarPaginadoService, PedidoListarPaginadoService>();
+            services.AddScoped<IPedidoAdicionarService, PedidoAdicionarService>();
+            services.AddScoped<IPedidoAtualizarService, PedidoAtualizarService>();
+            services.AddScoped<IPedidoExcluirService, PedidoExcluirService>();
         }
     }
 }
