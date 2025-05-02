@@ -4,12 +4,12 @@ using PedidoProdutoCliente.Infrastructure.Contexts;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.Error() 
+    .MinimumLevel.Error()
     .WriteTo.File(
-        path: "log-.txt", 
+        path: "log-.txt",
         outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}",
-        rollingInterval: RollingInterval.Day, 
-        retainedFileCountLimit: 7 
+        rollingInterval: RollingInterval.Day,
+        retainedFileCountLimit: 7
     )
     .Enrich.FromLogContext()
     .CreateLogger();

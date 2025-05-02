@@ -2,7 +2,7 @@
 {
     public class ClienteRequest
     {
-        public class Adicionar
+        public class AdicionarClienteRequest
         {
             public required string Nome { get; set; }
             public required string CPF { get; set; } = string.Empty;
@@ -11,7 +11,7 @@
             public string? Endereco { get; set; }
         }
 
-        public class Atualizar
+        public class AtualizarClienteRequest
         {
             public required int Id { get; set; }
             public string? Email { get; set; }

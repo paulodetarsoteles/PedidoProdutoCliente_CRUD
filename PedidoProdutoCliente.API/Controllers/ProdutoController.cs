@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using PedidoProdutoCliente.Application.Models.Requests;
 using PedidoProdutoCliente.Application.ServicesInterfaces.ProdutoServicesInterfaces;
 
-namespace PedidoProdutoproduto.API.Controllers
+namespace PedidoProdutoCliente.API.Controllers
 {
     [ApiController]
     [Route("api/produto")]
@@ -19,6 +19,26 @@ namespace PedidoProdutoproduto.API.Controllers
         private readonly IProdutoAtualizarService _produtoAtualizarService = produtoAtualizarService;
         private readonly IProdutoExcluirService _produtoExcluirService = produtoExcluirService;
         private readonly ILogger<ProdutoController> _logger = logger;
+
+        [HttpGet("buscar-por-nome")]
+        public async Task<IActionResult> BuscarPorNome([FromQuery] string nome)
+        {
+            try
+            {
+                var result = await _produtoBuscarPorNomeService.Process(nome);
+
+                if (result.ValidParameters == false) return BadRequest(result);
+
+                if (result.Data == null || result.Data.Count == 0) return NotFound(result);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, "Ocorreu um erro ao processar a requisição.");
+                return StatusCode(500, "Erro inesperado");
+            }
+        }
 
         [HttpGet("listar-paginado")]
         public async Task<IActionResult> ListarPaginado([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
@@ -41,7 +61,7 @@ namespace PedidoProdutoproduto.API.Controllers
         }
 
         [HttpPost("adicionar")]
-        public async Task<IActionResult> Adicionar([FromBody] ProdutoRequest.Adicionar request)
+        public async Task<IActionResult> Adicionar([FromBody] ProdutoRequest.AdicionarProdutoRequest request)
         {
             try
             {
@@ -59,7 +79,7 @@ namespace PedidoProdutoproduto.API.Controllers
         }
 
         [HttpPut("atualizar")]
-        public async Task<IActionResult> Atualizar([FromBody] ProdutoRequest.Atualizar request)
+        public async Task<IActionResult> Atualizar([FromBody] ProdutoRequest.AtualizarProdutoRequest request)
         {
             try
             {

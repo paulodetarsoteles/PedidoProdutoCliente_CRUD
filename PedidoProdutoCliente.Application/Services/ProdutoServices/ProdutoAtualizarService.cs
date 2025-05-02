@@ -11,7 +11,7 @@ namespace PedidoProdutoProduto.Application.Services.ProdutoServices
         private readonly IProdutoRepository _produtoRepository = produtoRepository;
         private readonly List<string> notifications = [];
 
-        public async Task<BaseResponse<bool>> Process(ProdutoRequest.Atualizar request)
+        public async Task<BaseResponse<bool>> Process(ProdutoRequest.AtualizarProdutoRequest request)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace PedidoProdutoProduto.Application.Services.ProdutoServices
             }
         }
 
-        private async Task<bool> ValidaParametros(ProdutoRequest.Atualizar request)
+        private async Task<bool> ValidaParametros(ProdutoRequest.AtualizarProdutoRequest request)
         {
             if (request == null)
             {
@@ -63,7 +63,7 @@ namespace PedidoProdutoProduto.Application.Services.ProdutoServices
             return true;
         }
 
-        private async Task<bool> AtualizarEntidade(Produto produto, ProdutoRequest.Atualizar request)
+        private async Task<bool> AtualizarEntidade(Produto produto, ProdutoRequest.AtualizarProdutoRequest request)
         {
             if (!string.IsNullOrEmpty(request.Nome))
             {

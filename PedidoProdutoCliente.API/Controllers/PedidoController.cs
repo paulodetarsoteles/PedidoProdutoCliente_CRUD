@@ -30,7 +30,7 @@ namespace PedidoProdutoCliente.API.Controllers
         }
 
         [HttpPost("adicionar")]
-        public async Task<IActionResult> Adicionar([FromBody] ClienteRequest.Adicionar request)
+        public async Task<IActionResult> Adicionar([FromBody] ClienteRequest.AdicionarClienteRequest request)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace PedidoProdutoCliente.API.Controllers
         }
 
         [HttpPut("atualizar")]
-        public async Task<IActionResult> Atualizar([FromBody] ClienteRequest.Atualizar request)
+        public async Task<IActionResult> Atualizar([FromBody] ClienteRequest.AtualizarClienteRequest request)
         {
             try
             {

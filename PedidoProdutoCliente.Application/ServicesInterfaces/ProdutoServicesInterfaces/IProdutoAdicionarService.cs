@@ -5,6 +5,6 @@ namespace PedidoProdutoCliente.Application.ServicesInterfaces.ProdutoServicesInt
 {
     public interface IProdutoAdicionarService
     {
-        Task<BaseResponse<bool>> Process(ProdutoRequest.Adicionar request);
+        Task<BaseResponse<bool>> Process(ProdutoRequest.AdicionarProdutoRequest request);
     }
 }

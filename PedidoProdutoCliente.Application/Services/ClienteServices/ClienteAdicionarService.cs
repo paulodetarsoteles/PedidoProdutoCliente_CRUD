@@ -12,7 +12,7 @@ namespace PedidoProdutoCliente.Application.Services.ClienteServices
         private readonly IClienteRepository _clienteRepository = clienteRepository;
         private readonly List<string> notifications = [];
 
-        public async Task<BaseResponse<bool>> Process(ClienteRequest.Adicionar request)
+        public async Task<BaseResponse<bool>> Process(ClienteRequest.AdicionarClienteRequest request)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace PedidoProdutoCliente.Application.Services.ClienteServices
             }
         }
 
-        private async Task<bool> ValidaParametros(ClienteRequest.Adicionar request)
+        private async Task<bool> ValidaParametros(ClienteRequest.AdicionarClienteRequest request)
         {
             if (request == null)
             {
@@ -67,7 +67,7 @@ namespace PedidoProdutoCliente.Application.Services.ClienteServices
             return true;
         }
 
-        private async Task<bool> AdicionarEntidade(ClienteRequest.Adicionar request)
+        private async Task<bool> AdicionarEntidade(ClienteRequest.AdicionarClienteRequest request)
         {
             var cliente = new Cliente()
             {

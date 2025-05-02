@@ -12,7 +12,7 @@ namespace PedidoProdutoCliente.Application.Services.ClienteServices
         private readonly IClienteRepository _clienteRepository = clienteRepository;
         private readonly List<string> notifications = [];
 
-        public async Task<BaseResponse<bool>> Process(ClienteRequest.Atualizar request)
+        public async Task<BaseResponse<bool>> Process(ClienteRequest.AtualizarClienteRequest request)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace PedidoProdutoCliente.Application.Services.ClienteServices
             }
         }
 
-        private bool ValidaParametros(ClienteRequest.Atualizar request)
+        private bool ValidaParametros(ClienteRequest.AtualizarClienteRequest request)
         {
             if (request == null)
             {
@@ -71,7 +71,7 @@ namespace PedidoProdutoCliente.Application.Services.ClienteServices
             return true;
         }
 
-        private async Task<bool> AtualizarEntidade(Cliente cliente, ClienteRequest.Atualizar request)
+        private async Task<bool> AtualizarEntidade(Cliente cliente, ClienteRequest.AtualizarClienteRequest request)
         {
             if (!string.IsNullOrEmpty(request.Email))
             {

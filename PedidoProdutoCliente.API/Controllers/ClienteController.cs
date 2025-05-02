@@ -21,11 +21,11 @@ namespace PedidoProdutoCliente.API.Controllers
         private readonly ILogger<ClienteController> _logger = logger;
 
         [HttpGet("buscar-por-nome")]
-        public async Task<IActionResult> BuscarPorNome([FromQuery] string nomeRequest)
+        public async Task<IActionResult> BuscarPorNome([FromQuery] string nome)
         {
             try
             {
-                var result = await _clienteBuscarPorNomeService.Process(nomeRequest);
+                var result = await _clienteBuscarPorNomeService.Process(nome);
 
                 if (result.ValidParameters == false) return BadRequest(result);
 
@@ -61,7 +61,7 @@ namespace PedidoProdutoCliente.API.Controllers
         }
 
         [HttpPost("adicionar")]
-        public async Task<IActionResult> Adicionar([FromBody] ClienteRequest.Adicionar request)
+        public async Task<IActionResult> Adicionar([FromBody] ClienteRequest.AdicionarClienteRequest request)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace PedidoProdutoCliente.API.Controllers
         }
 
         [HttpPut("atualizar")]
-        public async Task<IActionResult> Atualizar([FromBody] ClienteRequest.Atualizar request)
+        public async Task<IActionResult> Atualizar([FromBody] ClienteRequest.AtualizarClienteRequest request)
         {
             try
             {

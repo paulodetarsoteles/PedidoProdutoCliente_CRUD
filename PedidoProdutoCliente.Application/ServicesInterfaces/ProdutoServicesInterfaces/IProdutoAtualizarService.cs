@@ -5,6 +5,6 @@ namespace PedidoProdutoCliente.Application.ServicesInterfaces.ProdutoServicesInt
 {
     public interface IProdutoAtualizarService
     {
-        Task<BaseResponse<bool>> Process(ProdutoRequest.Atualizar request);
+        Task<BaseResponse<bool>> Process(ProdutoRequest.AtualizarProdutoRequest request);
     }
 }

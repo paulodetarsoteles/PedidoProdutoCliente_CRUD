@@ -1,6 +1,4 @@
-﻿using PedidoProdutoCliente.Application.Models.Responses;
-
-namespace PedidoProdutoCliente.Application.ServicesInterfaces.ProdutoServicesInterfaces
+﻿namespace PedidoProdutoCliente.Application.ServicesInterfaces.ProdutoServicesInterfaces
 {
     public interface IProdutoExcluirService
     {
