@@ -21,7 +21,8 @@ namespace PedidoProdutoCliente.API.Controllers
 
 
         /// <summary>Lista os pedidos de forma paginada.</summary>
-        /// <param name="request">Numero da página e a quantidade de resultados por página.</param>
+        /// <param name="page">Numero da página.</param>
+        /// <param name="pageSize">Quantidade de resultados por página.</param>
         /// <returns>Retorna uma lista de pedidos.</returns>
         [HttpGet("listar-paginado")]
         public async Task<IActionResult> ListarPaginado([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
@@ -85,7 +86,7 @@ namespace PedidoProdutoCliente.API.Controllers
         }
 
         /// <summary>Exclui um pedido.</summary>
-        /// <param name="request">Dados do pedido a ser excluído.</param>
+        /// <param name="id">Dados do pedido a ser excluído.</param>
         /// <returns>Retorna o resultado da operação.</returns>
         [HttpDelete("excluir")]
         public async Task<IActionResult> Excluir([FromQuery] int id)

@@ -15,7 +15,7 @@ namespace PedidoProdutoCliente.Application.Extensions
 
         public static bool ValidaCPF(string cpf)
         {
-            //Feito o ajuste para testes aceitar cpfs invalidos somente com o tamanho padrão
+            //ATENÇÃO!!! -> Feito o ajuste para testes aceitar cpfs invalidos somente com o tamanho padrão
             if (cpf.Length == 11) return true;
             else return false;
 

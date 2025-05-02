@@ -21,7 +21,7 @@ namespace PedidoProdutoCliente.API.Controllers
         private readonly ILogger<ProdutoController> _logger = logger;
 
         /// <summary>Pesquisa um produto pelo nome.</summary>
-        /// <param name="request">Nome do produto a ser pesquisado.</param>
+        /// <param name="nome">Nome do produto a ser pesquisado.</param>
         /// <returns>Retorna uma lista de produtos.</returns>
         [HttpGet("buscar-por-nome")]
         public async Task<IActionResult> BuscarPorNome([FromQuery] string nome)
@@ -44,7 +44,8 @@ namespace PedidoProdutoCliente.API.Controllers
         }
 
         /// <summary>Lista os produtos de forma paginada.</summary>
-        /// <param name="request">Numero da página e a quantidade de resultados por página.</param>
+        /// <param name="page">Numero da página.</param>
+        /// <param name="pageSize">Quantidade de resultados por página.</param>
         /// <returns>Retorna uma lista de produtos.</returns>
         [HttpGet("listar-paginado")]
         public async Task<IActionResult> ListarPaginado([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
@@ -109,7 +110,7 @@ namespace PedidoProdutoCliente.API.Controllers
         }
 
         /// <summary>Exclui um produto.</summary>
-        /// <param name="request">Dados do produto a ser excluído.</param>
+        /// <param name="id">Dados do produto a ser excluído.</param>
         /// <returns>Retorna o resultado da operação.</returns>
         [HttpDelete("excluir")]
         public async Task<IActionResult> Excluir([FromQuery] int id)
