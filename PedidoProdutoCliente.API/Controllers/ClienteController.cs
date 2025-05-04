@@ -22,9 +22,9 @@ namespace PedidoProdutoCliente.API.Controllers
         private readonly IClienteObterPorIdService _clienteObterPorIdService = clienteObterPorIdService;
         private readonly ILogger<ClienteController> _logger = logger;
 
-        /// <summary>Pesquisa um cliente pelo nome.</summary>
-        /// <param name="id">Nome do cliente a ser pesquisado.</param>
-        /// <returns>Retorna uma lista de clientes.</returns>
+        /// <summary>Pesquisa um cliente pelo id.</summary>
+        /// <param name="id">Id do cliente a ser pesquisado.</param>
+        /// <returns>Retorna um cliente.</returns>
         [HttpGet("obter-por-id")]
         public async Task<IActionResult> ObterPorId([FromQuery] int id)
         {

@@ -11,6 +11,7 @@ namespace PedidoProdutoCliente.API.Controllers
         IProdutoAdicionarService produtoAdicionarService,
         IProdutoAtualizarService produtoAtualizarService,
         IProdutoExcluirService produtoExcluirService,
+        IProdutoObterPorIdService produtoObterPorIdService,
         ILogger<ProdutoController> logger) : ControllerBase
     {
         private readonly IProdutoBuscarPorNomeService _produtoBuscarPorNomeService = produtoBuscarPorNomeService;
@@ -18,7 +19,31 @@ namespace PedidoProdutoCliente.API.Controllers
         private readonly IProdutoAdicionarService _produtoAdicionarService = produtoAdicionarService;
         private readonly IProdutoAtualizarService _produtoAtualizarService = produtoAtualizarService;
         private readonly IProdutoExcluirService _produtoExcluirService = produtoExcluirService;
+        private readonly IProdutoObterPorIdService _produtoObterPorIdService = produtoObterPorIdService;
         private readonly ILogger<ProdutoController> _logger = logger;
+
+        /// <summary>Pesquisa um produto pelo Id.</summary>
+        /// <param name="id">Id do produto a ser pesquisado.</param>
+        /// <returns>Retorna um produto.</returns>
+        [HttpGet("obter-por-id")]
+        public async Task<IActionResult> ObterPorId([FromQuery] int id)
+        {
+            try
+            {
+                var result = await _produtoObterPorIdService.Process(id);
+
+                if (result.ValidParameters == false) return BadRequest(result);
+
+                if (result.Data == null) return NotFound(result);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, "Ocorreu um erro ao processar a requisição.");
+                return StatusCode(500, "Erro inesperado");
+            }
+        }
 
         /// <summary>Pesquisa um produto pelo nome.</summary>
         /// <param name="nome">Nome do produto a ser pesquisado.</param>
