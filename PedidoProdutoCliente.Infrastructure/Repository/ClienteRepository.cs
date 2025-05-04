@@ -13,7 +13,7 @@ namespace PedidoProdutoCliente.Infrastructure.Repository
         public async Task<List<Cliente>?> BuscarPorNome(string nome)
         {
             return await _context.Clientes
-                .Where(c => c.Nome.Contains(nome) &&
+                .Where(c => c.Nome.ToLower().Contains(nome.ToLower()) &&
                        c.DataExclusao == null)
                 .Include(c => c.Pedidos)
                 .ToListAsync();
@@ -23,6 +23,14 @@ namespace PedidoProdutoCliente.Infrastructure.Repository
         {
             return await _context.Clientes
                 .AnyAsync(c => c.CPF == cpf);
+        }
+
+        public override async Task<Cliente?> ObterPorId(int id)
+        {
+            return await _context.Clientes
+                .Where(c => c.Id == id)
+                .Include(c => c.Pedidos)
+                .FirstOrDefaultAsync();
         }
     }
 }

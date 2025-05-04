@@ -11,6 +11,7 @@ namespace PedidoProdutoCliente.API.Controllers
         IClienteAdicionarService clienteAdicionarService,
         IClienteAtualizarService clienteAtualizarService,
         IClienteExcluirService clienteExcluirService,
+        IClienteObterPorIdService clienteObterPorIdService,
         ILogger<ClienteController> logger) : ControllerBase
     {
         private readonly IClienteBuscarPorNomeService _clienteBuscarPorNomeService = clienteBuscarPorNomeService;
@@ -18,7 +19,31 @@ namespace PedidoProdutoCliente.API.Controllers
         private readonly IClienteAdicionarService _clienteAdicionarService = clienteAdicionarService;
         private readonly IClienteAtualizarService _clienteAtualizarService = clienteAtualizarService;
         private readonly IClienteExcluirService _clienteExcluirService = clienteExcluirService;
+        private readonly IClienteObterPorIdService _clienteObterPorIdService = clienteObterPorIdService;
         private readonly ILogger<ClienteController> _logger = logger;
+
+        /// <summary>Pesquisa um cliente pelo nome.</summary>
+        /// <param name="id">Nome do cliente a ser pesquisado.</param>
+        /// <returns>Retorna uma lista de clientes.</returns>
+        [HttpGet("obter-por-id")]
+        public async Task<IActionResult> ObterPorId([FromQuery] int id)
+        {
+            try
+            {
+                var result = await _clienteObterPorIdService.Process(id);
+
+                if (result.ValidParameters == false) return BadRequest(result);
+
+                if (result.Data == null) return NotFound(result);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, "Ocorreu um erro ao processar a requisição.");
+                return StatusCode(500, "Erro inesperado");
+            }
+        }
 
         /// <summary>Pesquisa um cliente pelo nome.</summary>
         /// <param name="nome">Nome do cliente a ser pesquisado.</param>

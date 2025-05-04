@@ -31,5 +31,14 @@ namespace PedidoProdutoCliente.Infrastructure.Repository
                 .Include(p => p.Produtos)
                 .ToListAsync();
         }
+
+        public override async Task<Pedido?> ObterPorId(int id)
+        {
+            return await _context.Pedidos
+                .Where(p => p.Id == id)
+                .Include(p => p.ClienteId)
+                .Include(p => p.Produtos)
+                .FirstOrDefaultAsync();
+        }
     }
 }
