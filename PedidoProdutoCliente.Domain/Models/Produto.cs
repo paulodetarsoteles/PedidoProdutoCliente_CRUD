@@ -1,4 +1,5 @@
 ﻿using PedidoProdutoCliente.Domain.Interfaces;
+using System.Text.Json.Serialization;
 
 namespace PedidoProdutoCliente.Domain.Models
 {
@@ -12,6 +13,7 @@ namespace PedidoProdutoCliente.Domain.Models
         public DateTime? DataUltimaAtualizacao { get; set; }
         public DateTime? DataExclusao { get; set; }
 
+        [JsonIgnore]
         public List<Pedido>? Pedidos { get; set; }
     }
 }

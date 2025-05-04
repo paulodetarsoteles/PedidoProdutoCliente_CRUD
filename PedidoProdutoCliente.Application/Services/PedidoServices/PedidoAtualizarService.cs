@@ -138,7 +138,7 @@ namespace PedidoProdutoCliente.Application.Services.PedidoServices
 
             pedido.ValorParcela = Math.Round((pedido.ValorTotal / pedido.Parcelas), 2);
 
-            pedido.DataUltimaAtualizacao = DateTime.UtcNow;
+            pedido.DataUltimaAtualizacao = DateTime.Now;
 
             return await _pedidoRepository.Atualizar(pedido);
         }

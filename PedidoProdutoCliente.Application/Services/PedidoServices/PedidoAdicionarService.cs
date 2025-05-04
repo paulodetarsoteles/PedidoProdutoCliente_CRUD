@@ -131,7 +131,7 @@ namespace PedidoProdutoCliente.Application.Services.PedidoServices
                 ValorTotal = valorTotalPedido,
                 Observacoes = request.Observacoes,
                 Produtos = produtos,
-                DataPedido = DateTime.UtcNow
+                DataPedido = DateTime.Now
             };
 
             return await _pedidoRepository.Adicionar(pedido);

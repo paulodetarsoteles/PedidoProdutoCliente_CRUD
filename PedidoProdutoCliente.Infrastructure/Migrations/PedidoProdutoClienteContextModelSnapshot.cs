@@ -53,13 +53,13 @@ namespace PedidoProdutoCliente.Infrastructure.Migrations
                         .HasComment("Documento do cliente (CPF)");
 
                     b.Property<DateTime>("DataCadastro")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime?>("DataExclusao")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime?>("DataUltimaAtualizacao")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -101,13 +101,13 @@ namespace PedidoProdutoCliente.Infrastructure.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime?>("DataExclusao")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DataPedido")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime?>("DataUltimaAtualizacao")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Observacoes")
                         .HasColumnType("text");
@@ -147,13 +147,13 @@ namespace PedidoProdutoCliente.Infrastructure.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("DataExclusao")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime?>("DataUltimaAtualizacao")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("Datacadastro")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -164,7 +164,7 @@ namespace PedidoProdutoCliente.Infrastructure.Migrations
 
                     b.Property<int>("Quantidade")
                         .HasColumnType("integer")
-                        .HasComment("Qantidade em estoque");
+                        .HasComment("Quantidade em estoque");
 
                     b.Property<decimal>("Valor")
                         .HasColumnType("numeric")

@@ -80,7 +80,7 @@ namespace PedidoProdutoCliente.Application.Services.ProdutoServices
                 produto.Quantidade = (int)request.Quantidade;
             }
 
-            produto.DataUltimaAtualizacao = DateTime.UtcNow;
+            produto.DataUltimaAtualizacao = DateTime.Now;
 
             return await _produtoRepository.Atualizar(produto);
         }

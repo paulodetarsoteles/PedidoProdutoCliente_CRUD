@@ -76,7 +76,7 @@ namespace PedidoProdutoCliente.Application.Services.ClienteServices
                 Email = request.Email,
                 Telefone = request.Telefone,
                 Endereco = request.Endereco,
-                DataCadastro = DateTime.UtcNow
+                DataCadastro = DateTime.Now
             };
 
             return await _clienteRepository.Adicionar(cliente);

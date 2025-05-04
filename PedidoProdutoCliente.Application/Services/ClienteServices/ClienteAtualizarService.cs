@@ -88,7 +88,7 @@ namespace PedidoProdutoCliente.Application.Services.ClienteServices
                 cliente.Endereco = request.Endereco;
             }
 
-            cliente.DataUltimaAtualizacao = DateTime.UtcNow;
+            cliente.DataUltimaAtualizacao = DateTime.Now;
 
             return await _clienteRepository.Atualizar(cliente);
         }

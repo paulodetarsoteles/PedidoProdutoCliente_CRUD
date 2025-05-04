@@ -73,7 +73,7 @@ namespace PedidoProdutoCliente.Application.Services.ProdutoServices
                 Nome = request.Nome,
                 Valor = request.Valor,
                 Quantidade = request.Quantidade,
-                Datacadastro = DateTime.UtcNow
+                Datacadastro = DateTime.Now
             };
 
             return await _produtoRepository.Adicionar(produto);

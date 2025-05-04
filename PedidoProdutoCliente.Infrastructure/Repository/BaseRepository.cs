@@ -21,7 +21,7 @@ namespace PedidoProdutoCliente.Infrastructure.Repository
                 .ToListAsync();
         }
 
-        public async Task<T?> ObterPorId(int id)
+        public virtual async Task<T?> ObterPorId(int id)
         {
             return await _context.Set<T>()
                 .Where(e => e.Id == id && e.DataExclusao == null)

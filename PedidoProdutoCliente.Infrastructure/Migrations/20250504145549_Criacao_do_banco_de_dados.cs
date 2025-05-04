@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -6,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace PedidoProdutoCliente.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Recriacao_Banco_Dados : Migration
+    public partial class Criacao_do_banco_de_dados : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,9 +23,9 @@ namespace PedidoProdutoCliente.Infrastructure.Migrations
                     Email = table.Column<string>(type: "character varying(200)", unicode: false, maxLength: 200, nullable: false, comment: "Email do cliente"),
                     Telefone = table.Column<string>(type: "character varying(13)", unicode: false, maxLength: 13, nullable: true, comment: "Número do telefone do cliente"),
                     Endereco = table.Column<string>(type: "text", nullable: true),
-                    DataCadastro = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    DataUltimaAtualizacao = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    DataExclusao = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    DataCadastro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    DataUltimaAtualizacao = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    DataExclusao = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -39,10 +40,10 @@ namespace PedidoProdutoCliente.Infrastructure.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Nome = table.Column<string>(type: "character varying(150)", unicode: false, maxLength: 150, nullable: false, comment: "Nome do produto"),
                     Valor = table.Column<decimal>(type: "numeric", nullable: false, comment: "Valor do produto"),
-                    Quantidade = table.Column<int>(type: "integer", nullable: false, comment: "Qantidade em estoque"),
-                    Datacadastro = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    DataUltimaAtualizacao = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    DataExclusao = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    Quantidade = table.Column<int>(type: "integer", nullable: false, comment: "Quantidade em estoque"),
+                    Datacadastro = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    DataUltimaAtualizacao = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    DataExclusao = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -61,9 +62,9 @@ namespace PedidoProdutoCliente.Infrastructure.Migrations
                     ValorParcela = table.Column<decimal>(type: "numeric", nullable: false, comment: "Valor da parcela"),
                     ValorTotal = table.Column<decimal>(type: "numeric", nullable: false, comment: "Valor total do pedido"),
                     Observacoes = table.Column<string>(type: "text", nullable: true),
-                    DataPedido = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    DataUltimaAtualizacao = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    DataExclusao = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    DataPedido = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    DataUltimaAtualizacao = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    DataExclusao = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {

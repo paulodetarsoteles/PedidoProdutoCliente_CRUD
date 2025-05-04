@@ -1,4 +1,5 @@
 ﻿using PedidoProdutoCliente.Domain.Interfaces;
+using System.Text.Json.Serialization;
 
 namespace PedidoProdutoCliente.Domain.Models
 {

@@ -17,7 +17,7 @@ namespace PedidoProdutoCliente.Application.Services.ProdutoServices
 
                 if (produto == null || produto.DataExclusao != null) return false;
 
-                produto.DataExclusao = DateTime.UtcNow;
+                produto.DataExclusao = DateTime.Now;
 
                 var result = await _produtoRepository.Excluir(produto);
 
