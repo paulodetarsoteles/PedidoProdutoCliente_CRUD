@@ -8,12 +8,12 @@ namespace PedidoProdutoCliente.API.Extensions
         {
             try
             {
-            using var scope = app.ApplicationServices.CreateScope();
-            var dbContext = scope.ServiceProvider.GetRequiredService<TDbContext>();
+                using var scope = app.ApplicationServices.CreateScope();
+                var dbContext = scope.ServiceProvider.GetRequiredService<TDbContext>();
 
-            dbContext.Database.Migrate();
+                dbContext.Database.Migrate();
 
-            return app;
+                return app;
             }
             catch (Exception ex)
             {

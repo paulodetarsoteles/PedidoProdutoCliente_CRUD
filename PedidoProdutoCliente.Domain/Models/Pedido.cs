@@ -18,7 +18,6 @@ namespace PedidoProdutoCliente.Domain.Models
 
         [JsonIgnore]
         public Cliente? Cliente { get; set; }
-        [JsonIgnore]
         public List<Produto>? Produtos { get; set; }
     }
 }

@@ -10,15 +10,38 @@ namespace PedidoProdutoCliente.API.Controllers
         IPedidoAdicionarService pedidoAdicionarService,
         IPedidoAtualizarService pedidoAtualizarService,
         IPedidoExcluirService pedidoExcluirService,
+        IPedidoObterPorIdService pedidoObterPorIdService,
         ILogger<PedidoController> logger) : ControllerBase
     {
         private readonly IPedidoListarPaginadoService _pedidoListarPaginadoService = pedidoListarPaginadoService;
         private readonly IPedidoAdicionarService _pedidoAdicionarService = pedidoAdicionarService;
         private readonly IPedidoAtualizarService _pedidoAtualizarService = pedidoAtualizarService;
         private readonly IPedidoExcluirService _pedidoExcluirService = pedidoExcluirService;
+        private readonly IPedidoObterPorIdService _pedidoObterPorIdService = pedidoObterPorIdService;
         private readonly ILogger<PedidoController> _logger = logger;
 
+        /// <summary>Busca o pedido pelo Id.</summary>
+        /// <param name="id">Id do pedido.</param>
+        /// <returns>Retorna um pedido.</returns>
+        [HttpGet("obter-por-id")]
+        public async Task<IActionResult> ObterPorId([FromQuery] int id)
+        {
+            try
+            {
+                var result = await _pedidoObterPorIdService.Process(id);
 
+                if (result.ValidParameters == false) return BadRequest(result);
+
+                if (result.Data == null) return NotFound(result);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, "Ocorreu um erro ao processar a requisição.");
+                return StatusCode(500, "Erro inesperado");
+            }
+        }
 
         /// <summary>Lista os pedidos de forma paginada.</summary>
         /// <param name="page">Numero da página.</param>
@@ -37,8 +60,9 @@ namespace PedidoProdutoCliente.API.Controllers
 
                 return Ok(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex.Message, "Ocorreu um erro ao processar a requisição.");
                 return StatusCode(500, "Erro inesperado");
             }
         }

@@ -39,6 +39,7 @@ namespace PedidoProdutoCliente.API.Extensions
             services.AddScoped<IPedidoAdicionarService, PedidoAdicionarService>();
             services.AddScoped<IPedidoAtualizarService, PedidoAtualizarService>();
             services.AddScoped<IPedidoExcluirService, PedidoExcluirService>();
+            services.AddScoped<IPedidoObterPorIdService, PedidoObterPorIdService>();
         }
     }
 }
