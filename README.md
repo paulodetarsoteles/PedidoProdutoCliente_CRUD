@@ -39,7 +39,7 @@ docker run -d --name postgres_pedidoprodutocliente --hostname postgres_host -e P
 
 ## ⚙️ Aplicação de Migrations Automáticas
 
-Ao iniciar a aplicação, todas as migrations existentes são aplicadas automaticamente ao banco de dados, sem a necessidade de executar comandos como `update-database`.
+Foi usada uma abordagem de DataSeeder, ao iniciar a aplicação, todas as migrations existentes são aplicadas automaticamente ao banco de dados, sem a necessidade de executar comandos como `update-database`.
 
 ## 🧠 Modelo de Domínio
 
